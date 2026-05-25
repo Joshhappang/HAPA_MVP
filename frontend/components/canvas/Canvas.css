@@ -1,0 +1,86 @@
+/* =========================================
+   HAPA MINI FIGMA - CANVAS STYLES
+   frontend/components/canvas/Canvas.css
+========================================= */
+
+/* =========================
+   WRAPPER ROOT
+========================= */
+
+.hapa-canvas-wrapper {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+    overflow: hidden;
+
+    background: #0f0f10;
+}
+
+/* =========================
+   VIEWPORT (CAMERA WINDOW)
+========================= */
+
+.hapa-canvas-viewport {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+    overflow: hidden;
+
+    background: #0f0f10;
+
+    cursor: default;
+}
+
+/* =========================
+   WORLD LAYER (INFINITE SPACE)
+========================= */
+
+.hapa-canvas-world {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    will-change: transform;
+}
+
+/* =========================
+   STAGE (DRAWING AREA)
+========================= */
+
+.hapa-canvas-stage {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+}
+
+/* =========================
+   CANVAS ELEMENT
+========================= */
+
+.hapa-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    cursor: default;
+}
+
+/* =========================
+   OVERLAY LAYER (UI ABOVE CANVAS)
+========================= */
+
+.hapa-canvas-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none; /* IMPORTANT: allow canvas interaction */
+
+    z-index: 10;
+}

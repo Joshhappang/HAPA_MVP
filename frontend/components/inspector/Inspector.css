@@ -1,0 +1,121 @@
+/* =========================================
+   HAPA MINI FIGMA - INSPECTOR STYLES
+========================================= */
+
+.hapa-inspector-section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.inspector-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 6px 8px;
+    cursor: pointer;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: #cfcfcf;
+    border-radius: 6px;
+}
+
+.inspector-section-header:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.inspector-section-title {
+    opacity: 0.9;
+}
+
+.inspector-section-toggle {
+    opacity: 0.6;
+}
+
+/* =========================
+   FIELD
+========================= */
+
+.hapa-inspector-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 10px;
+    padding: 6px 8px;
+}
+
+.inspector-field-label {
+    font-size: 11px;
+    opacity: 0.7;
+    width: 70px;
+}
+
+.inspector-field-input {
+    flex: 1;
+
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    color: #fff;
+    padding: 4px 6px;
+
+    border-radius: 6px;
+    font-size: 12px;
+
+    outline: none;
+}
+
+.inspector-field-input:focus {
+    border-color: rgba(0, 122, 255, 0.5);
+}
+
+/* =========================
+   ALIGN BUTTONS
+========================= */
+
+.layout-align-row,
+.transform-align-row,
+.text-align-row {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.layout-align-btn,
+.transform-align-btn,
+.text-align-btn {
+    flex: 1;
+
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+
+    color: #cfcfcf;
+    padding: 4px;
+
+    border-radius: 4px;
+    cursor: pointer;
+
+    font-size: 10px;
+}
+
+.layout-align-btn:hover,
+.transform-align-btn:hover,
+.text-align-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* =========================
+   SECTION LABELS
+========================= */
+
+.layout-section-label,
+.text-section-label,
+.transform-section-label {
+    font-size: 10px;
+    opacity: 0.6;
+    margin-top: 6px;
+}

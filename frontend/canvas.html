@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HAPA MVP Canvas</title>
+
+<style>
+
+*{ box-sizing:border-box; }
+
+body{
+    margin:0;
+    overflow:hidden;
+    background:#111;
+    font-family:Arial,sans-serif;
+}
+
+/* TOOLBAR */
+#toolbar{
+    height:60px;
+    background:#1e1e1e;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px;
+    border-bottom:1px solid #333;
+}
+
+button{
+    padding:10px 16px;
+    border:none;
+    border-radius:8px;
+    background:#00d2ff;
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#aiInput{
+    padding:8px;
+    border-radius:6px;
+    border:none;
+    width:200px;
+}
+
+/* CANVAS */
+#canvas{
+    width:100vw;
+    height:calc(100vh - 60px);
+    position:relative;
+    overflow:hidden;
+    background:#181818;
+}
+
+/* NODE */
+.node{
+    position:absolute;
+    width:140px;
+    height:100px;
+    background:#2b3245;
+    border:2px solid #00d2ff;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-weight:bold;
+    cursor:move;
+    user-select:none;
+}
+
+/* TEXT NODE */
+.text-node{
+    width:200px;
+    height:60px;
+    background:#202938;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- TOOLBAR -->
+<div id="toolbar">
+
+<button onclick="addRectangle()">Rectangle</button>
+<button onclick="addText()">Text</button>
+
+<input id="aiInput" placeholder="AI prompt..." />
+<button onclick="runAI()">AI</button>
+
+<button onclick="saveCanvas()">Save</button>
+<button onclick="loadCanvas()">Load</button>
+<button onclick="clearCanvas()">Clear</button>
+
+</div>
+
+<!-- CANVAS -->
+<div id="canvas"></div>
+
+<script>
+
+const canvas = document.getElementById("canvas");
+
+/* =========================
+   DRAG SYSTEM
+========================= */
+function enableDrag(el){
+
+    let offsetX = 0;
+    let offsetY = 0;
+    let dragging = false;
+
+    el.addEventListener("mousedown", (e)=>{
+        dragging = true;
+        offsetX = e.clientX - el.offsetLeft;
+        offsetY = e.clientY - el.offsetTop;
+    });
+
+    document.addEventListener("mousemove", (e)=>{
+        if(!dragging) return;
+        el.style.left = (e.clientX - offsetX) + "px";
+        el.style.top = (e.clientY - offsetY) + "px";
+    });
+
+    document.addEventListener("mouseup", ()=>{
+        dragging = false;
+    });
+}
+
+/* =========================
+   RECTANGLE
+========================= */
+function addRectangle(){
+
+    const el = document.createElement("div");
+    el.className = "node";
+    el.innerText = "RECT";
+    el.dataset.id = Date.now();
+
+    el.style.left = Math.random()*400 + "px";
+    el.style.top = Math.random()*300 + "px";
+
+    canvas.appendChild(el);
+    enableDrag(el);
+}
+
+/* =========================
+   TEXT
+========================= */
+function addText(){
+
+    const el = document.createElement("div");
+    el.className = "node text-node";
+    el.innerText = "TEXT";
+    el.contentEditable = true;
+    el.dataset.id = Date.now();
+
+    el.style.left = Math.random()*400 + "px";
+    el.style.top = Math.random()*300 + "px";
+
+    canvas.appendChild(el);
+    enableDrag(el);
+}
+
+/* =========================
+   AI ENGINE (BACKEND CONNECT)
+========================= */
+async function runAI(){
+
+    const prompt = document.getElementById("aiInput").value;
+
+    const res = await fetch("http://localhost:5000/ai/generate", {
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify({ prompt })
+    });
+
+    const data = await res.json();
+
+    const nodes = data.data.nodes; // ✅ FIXED SAFETY
+
+    canvas.innerHTML = ""; // clean canvas
+
+    nodes.forEach(n => {
+
+        const el = document.createElement("div");
+
+        el.className = "node";
+        el.innerText = n.text;
+
+        el.style.left = n.x + "px";
+        el.style.top = n.y + "px";
+
+        canvas.appendChild(el);
+        enableDrag(el);
+    });
+}
+
+/* =========================
+   SAVE
+========================= */
+function saveCanvas(){
+
+    const nodes = [];
+
+    document.querySelectorAll(".node").forEach(n => {
+
+        nodes.push({
+            text: n.innerText,
+            left: n.style.left,
+            top: n.style.top
+        });
+
+    });
+
+    localStorage.setItem("hapa_mvp", JSON.stringify(nodes));
+
+    alert("Saved");
+}
+
+/* =========================
+   LOAD
+========================= */
+function loadCanvas(){
+
+    canvas.innerHTML = "";
+
+    const saved = localStorage.getItem("hapa_mvp");
+
+    if(!saved) return;
+
+    JSON.parse(saved).forEach(n => {
+
+        const el = document.createElement("div");
+
+        el.className = "node";
+        el.innerText = n.text;
+        el.style.left = n.left;
+        el.style.top = n.top;
+
+        canvas.appendChild(el);
+        enableDrag(el);
+    });
+}
+
+/* =========================
+   CLEAR
+========================= */
+function clearCanvas(){
+    canvas.innerHTML = "";
+}
+
+</script>
+
+</body>
+</html>

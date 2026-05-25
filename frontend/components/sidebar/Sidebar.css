@@ -1,0 +1,378 @@
+/* =========================================
+   HAPA MINI FIGMA - SIDEBAR DESIGN SYSTEM
+   Sidebar.css (FULL CLEAN VERSION)
+========================================= */
+
+
+/* =========================================
+   SIDEBAR ITEM (LAYERS / ASSETS / PAGES)
+========================================= */
+
+.hapa-sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 6px 8px;
+    border-radius: 6px;
+
+    cursor: pointer;
+    user-select: none;
+
+    color: #cfcfcf;
+    font-size: 12px;
+
+    transition: all 0.15s ease;
+}
+
+.hapa-sidebar-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.hapa-sidebar-item.active {
+    background: rgba(0, 122, 255, 0.15);
+    color: #4da3ff;
+}
+
+.hapa-sidebar-item.selected {
+    outline: 1px solid rgba(0, 122, 255, 0.4);
+}
+
+.sidebar-item-icon {
+    width: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-item-name {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.sidebar-item-actions {
+    opacity: 0.4;
+}
+
+
+/* =========================================
+   SIDEBAR SECTION (GROUPING)
+========================================= */
+
+.hapa-sidebar-section {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 10px;
+}
+
+.sidebar-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 6px 8px;
+
+    cursor: pointer;
+    user-select: none;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: #bdbdbd;
+
+    border-radius: 6px;
+}
+
+.sidebar-section-header:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-section-title {
+    opacity: 0.9;
+}
+
+.sidebar-section-toggle {
+    opacity: 0.6;
+    font-size: 10px;
+}
+
+.sidebar-section-content {
+    display: flex;
+    flex-direction: column;
+
+    padding-left: 6px;
+    margin-top: 4px;
+
+    gap: 4px;
+}
+
+
+/* =========================================
+   LAYERS PANEL
+========================================= */
+
+.hapa-layers-panel {
+    display: flex;
+    flex-direction: column;
+
+    padding: 6px;
+}
+
+.layers-empty {
+    font-size: 11px;
+    opacity: 0.5;
+
+    padding: 10px 6px;
+    text-align: center;
+}
+
+
+/* =========================================
+   ASSETS PANEL
+========================================= */
+
+.hapa-assets-panel {
+    display: flex;
+    flex-direction: column;
+
+    padding: 6px;
+}
+
+.hapa-asset-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 6px;
+    border-radius: 6px;
+
+    cursor: pointer;
+    user-select: none;
+
+    transition: all 0.15s ease;
+}
+
+.hapa-asset-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.asset-preview {
+    width: 28px;
+    height: 28px;
+
+    border-radius: 4px;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.asset-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.asset-placeholder {
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+.asset-name {
+    font-size: 12px;
+    color: #cfcfcf;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.assets-empty {
+    font-size: 11px;
+    opacity: 0.5;
+
+    padding: 10px 6px;
+    text-align: center;
+}
+
+
+/* =========================================
+   PROPERTIES PANEL (INSPECTOR)
+========================================= */
+
+.hapa-properties-panel {
+    display: flex;
+    flex-direction: column;
+
+    padding: 10px;
+    gap: 10px;
+
+    font-size: 12px;
+    color: #cfcfcf;
+}
+
+.hapa-properties-panel.empty {
+    opacity: 0.5;
+    text-align: center;
+    padding: 20px;
+}
+
+.properties-header {
+    font-weight: bold;
+    margin-bottom: 6px;
+    opacity: 0.8;
+}
+
+.property-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.property-row {
+    display: flex;
+    gap: 8px;
+}
+
+.property-group label {
+    font-size: 10px;
+    opacity: 0.6;
+}
+
+.property-group input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    color: #fff;
+
+    padding: 4px 6px;
+    border-radius: 6px;
+
+    font-size: 12px;
+    outline: none;
+}
+
+.property-group input:focus {
+    border-color: rgba(0, 122, 255, 0.5);
+}
+
+
+/* =========================================
+   PAGES PANEL
+========================================= */
+
+.hapa-pages-panel {
+    display: flex;
+    flex-direction: column;
+
+    padding: 6px;
+}
+
+.hapa-add-page {
+    margin-top: 6px;
+    padding: 6px 8px;
+
+    font-size: 12px;
+    color: #4da3ff;
+
+    cursor: pointer;
+
+    border-radius: 6px;
+
+    transition: all 0.15s ease;
+}
+
+.hapa-add-page:hover {
+    background: rgba(0, 122, 255, 0.1);
+}
+
+
+/* =========================================
+   AI PANEL
+========================================= */
+
+.hapa-ai-panel {
+    display: flex;
+    flex-direction: column;
+
+    padding: 10px;
+    gap: 10px;
+
+    font-size: 12px;
+    color: #cfcfcf;
+}
+
+.ai-header {
+    font-weight: bold;
+    opacity: 0.9;
+}
+
+.ai-input {
+    width: 100%;
+    min-height: 80px;
+
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 6px;
+
+    color: white;
+    padding: 6px;
+
+    font-size: 12px;
+
+    outline: none;
+}
+
+.ai-run-button {
+    background: rgba(0, 122, 255, 0.3);
+    border: none;
+
+    padding: 8px;
+    border-radius: 6px;
+
+    color: white;
+
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.ai-run-button:hover {
+    background: rgba(0, 122, 255, 0.5);
+}
+
+.ai-run-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.ai-history {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    margin-top: 10px;
+}
+
+.ai-history-item {
+    padding: 6px;
+    border-radius: 6px;
+
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.ai-history-prompt {
+    font-size: 11px;
+    opacity: 0.8;
+}
+
+.ai-history-result {
+    font-size: 10px;
+    opacity: 0.5;
+}

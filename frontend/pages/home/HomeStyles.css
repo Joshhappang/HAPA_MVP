@@ -1,0 +1,298 @@
+/* =========================================
+   HAPA MINI FIGMA - Home Styles
+   frontend/pages/home/HomeStyles.css
+========================================= */
+
+/* =========================
+   GLOBAL RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Inter, Arial, sans-serif;
+}
+
+body {
+    background: #0f0f10;
+    color: #ffffff;
+}
+
+/* =========================
+   LAYOUT WRAPPER
+========================= */
+
+.hapa-home-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.home-topbar,
+.topbar-home {
+    height: 60px;
+    background: #161618;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 1px solid #2a2a2e;
+}
+
+.topbar-left .logo {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.topbar-center input {
+    width: 400px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: #222;
+    color: white;
+}
+
+.topbar-right button {
+    margin-left: 10px;
+    padding: 8px 10px;
+    background: #2a2a2e;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+
+.topbar-right button:hover {
+    background: #3a3a3f;
+}
+
+/* =========================
+   BODY LAYOUT
+========================= */
+
+.home-body {
+    display: flex;
+    height: calc(100vh - 60px);
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.home-sidebar,
+.sidebar-home {
+    width: 240px;
+    background: #141416;
+    border-right: 1px solid #2a2a2e;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.sidebar-brand h2 {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.sidebar-brand small {
+    color: #888;
+}
+
+.sidebar-menu {
+    margin-top: 20px;
+}
+
+.menu-item {
+    padding: 10px;
+    margin-bottom: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #bbb;
+    transition: 0.2s;
+}
+
+.menu-item:hover {
+    background: #222;
+    color: white;
+}
+
+.menu-item.active {
+    background: #2d2dff;
+    color: white;
+}
+
+/* =========================
+   CONTENT AREA
+========================= */
+
+.home-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* =========================
+   PROJECT GRID
+========================= */
+
+.project-grid-wrapper {
+    margin-top: 10px;
+}
+
+.section-header {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+}
+
+.project-card {
+    background: #1c1c1f;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    border: 1px solid transparent;
+}
+
+.project-card:hover {
+    border: 1px solid #3a3a3f;
+    transform: translateY(-2px);
+}
+
+.project-thumb {
+    height: 100px;
+    background: #2a2a2e;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.project-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.placeholder-thumb {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        #2a2a2e,
+        #1a1a1c
+    );
+}
+
+.project-title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.project-meta {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+}
+
+/* =========================
+   RECENT FILES
+========================= */
+
+.recent-files {
+    margin-top: 20px;
+}
+
+.section-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.recent-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.recent-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    background: #1c1c1f;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.recent-item:hover {
+    background: #2a2a2e;
+}
+
+.recent-thumb {
+    width: 50px;
+    height: 50px;
+    background: #2a2a2e;
+    border-radius: 6px;
+}
+
+.recent-name {
+    font-size: 14px;
+}
+
+.recent-meta {
+    font-size: 12px;
+    color: #888;
+}
+
+/* =========================
+   NEW PROJECT BUTTON
+========================= */
+
+.new-project-btn {
+    width: 100%;
+    padding: 16px;
+    background: #2d2dff;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.new-project-btn:hover {
+    background: #4444ff;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+    padding: 20px;
+    text-align: center;
+    color: #777;
+}
+
+/* =========================
+   LOADING & ERROR
+========================= */
+
+.loading {
+    color: #aaa;
+    padding: 20px;
+}
+
+.error {
+    color: #ff4d4d;
+    padding: 10px;
+}
