@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 from server import MiniFigmaAPIServer
 
@@ -7,7 +8,7 @@ engine = MiniFigmaAPIServer()
 engine.register_routes()
 
 # =========================
-# HEALTH CHECK (DEPLOY TEST)
+# HEALTH CHECK
 # =========================
 @app.route("/")
 def home():
@@ -22,7 +23,6 @@ def ai_generate():
 
     prompt = data.get("prompt", "")
 
-    # call AI engine
     result = engine.ai_generate(prompt)
 
     return jsonify({
@@ -31,18 +31,18 @@ def ai_generate():
     })
 
 # =========================
-# OPTIONAL: SIMPLE TEST ROUTE
+# TEST ROUTE
 # =========================
 @app.route("/ping")
 def ping():
-    return jsonify({"status": "ok", "message": "HAPA alive"})
+    return jsonify({
+        "status": "ok",
+        "message": "HAPA alive"
+    })
 
 # =========================
-# RUN SERVER (LOCAL ONLY)
+# RUN SERVER (FOR DEPLOY)
 # =========================
 if __name__ == "__main__":
-    app.run(
-        host="0.0.0.0",
-        port=5000,
-        debug=True
-    )
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)

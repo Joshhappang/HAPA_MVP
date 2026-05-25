@@ -27,7 +27,10 @@ class AuthAPI:
             "username": username,
             "password_hash": self._hash(password),
             "created_at": time.time(),
-            "plan": "free"   # 🔥 ADD FOR SUBSCRIPTION
+
+            # 💰 SUBSCRIPTION STATUS
+            "plan": "free",
+            "is_active": True
         }
 
         return {
@@ -58,7 +61,10 @@ class AuthAPI:
             "session_id": session_id,
             "user_id": user["id"],
             "username": username,
+
+            # 💰 penting untuk subscription check
             "plan": user.get("plan", "free"),
+
             "created_at": time.time(),
             "last_active": time.time()
         }
@@ -69,7 +75,7 @@ class AuthAPI:
         }
 
     # =========================
-    # VERIFY
+    # VERIFY SESSION
     # =========================
     def verify(self, session_id: str) -> bool:
 
@@ -80,6 +86,29 @@ class AuthAPI:
 
         session["last_active"] = time.time()
         return True
+
+    # =========================
+    # UPGRADE TO PRO (STRIPE CALLBACK)
+    # =========================
+    def upgrade_to_pro(self, username: str) -> Dict[str, Any]:
+
+        user = self.users.get(username)
+
+        if not user:
+            return self._error("User not found")
+
+        user["plan"] = "pro"
+
+        # update session juga
+        for sid, s in self.sessions.items():
+            if s["username"] == username:
+                s["plan"] = "pro"
+
+        return {
+            "status": "success",
+            "message": "Upgraded to PRO",
+            "plan": "pro"
+        }
 
     # =========================
     # LOGOUT
@@ -93,7 +122,7 @@ class AuthAPI:
         return self._error("Session not found")
 
     # =========================
-    # USER
+    # USER DATA
     # =========================
     def get_user(self, username: str) -> Optional[Dict[str, Any]]:
         return self.users.get(username)
@@ -111,7 +140,7 @@ class AuthAPI:
         }
 
     # =========================
-    # SECURITY HELPERS
+    # SECURITY
     # =========================
     def _hash(self, text: str) -> str:
         return hashlib.sha256(text.encode("utf-8")).hexdigest()
