@@ -6,43 +6,40 @@ import uuid
 class MiniFigmaAPIServer:
 
     def __init__(self):
-        self.projects = {}
-        self.sessions = {}
-        self.routes = {}
+        self.projects: Dict[str, Any] = {}
+        self.sessions: Dict[str, Any] = {}
+        self.routes: Dict[str, Any] = {}
 
     # =========================
     # ROUTER SYSTEM
     # =========================
     def route(self, path):
-
         def wrapper(func):
             self.routes[path] = func
             return func
-
         return wrapper
 
     def handle_request(self, path, payload=None):
-
         payload = payload or {}
         handler = self.routes.get(path)
 
         if not handler:
-            return {"status": "error", "message": "route not found"}
+            return {
+                "status": "error",
+                "message": "route not found"
+            }
 
         return handler(payload)
 
     # =========================
-    # 🧠 AI ENGINE (AUTO LAYOUT CORE)
+    # 🧠 AI ENGINE (CORE)
     # =========================
     def ai_generate(self, prompt: str):
 
         p = prompt.lower()
 
-        # =========================
         # LOGIN PAGE
-        # =========================
         if "login" in p:
-
             nodes = [
                 {"type": "title", "text": "Login Page"},
                 {"type": "input", "text": "Email"},
@@ -50,11 +47,8 @@ class MiniFigmaAPIServer:
                 {"type": "button", "text": "Login"}
             ]
 
-        # =========================
         # DASHBOARD
-        # =========================
         elif "dashboard" in p:
-
             nodes = [
                 {"type": "sidebar", "text": "Sidebar"},
                 {"type": "navbar", "text": "Top Bar"},
@@ -62,11 +56,8 @@ class MiniFigmaAPIServer:
                 {"type": "card", "text": "Stats"}
             ]
 
-        # =========================
         # LANDING PAGE
-        # =========================
         elif "landing" in p:
-
             nodes = [
                 {"type": "hero", "text": "Hero Section"},
                 {"type": "button", "text": "Get Started"},
@@ -74,11 +65,8 @@ class MiniFigmaAPIServer:
                 {"type": "feature", "text": "Feature 2"}
             ]
 
-        # =========================
         # DEFAULT
-        # =========================
         else:
-
             nodes = [
                 {"type": "card", "text": "AI Block"}
             ]
@@ -123,12 +111,11 @@ class MiniFigmaAPIServer:
             return self.sessions[sid]
 
     # =========================
-    # DEBUG
+    # DEBUG TOOL
     # =========================
     def debug(self):
-
-        print({
+        return {
             "projects": len(self.projects),
             "sessions": len(self.sessions),
             "routes": list(self.routes.keys())
-        })
+        }

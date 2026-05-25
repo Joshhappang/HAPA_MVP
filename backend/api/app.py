@@ -1,13 +1,10 @@
 import os
-import sys
 from flask import Flask, request, jsonify
 
 # =========================
-# FIX IMPORT PATH (IMPORTANT FOR RENDER)
+# IMPORT ENGINE (FIXED FOR RENDER)
 # =========================
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-
-from server import MiniFigmaAPIServer
+from backend.api.server import MiniFigmaAPIServer
 
 app = Flask(__name__)
 
@@ -48,7 +45,7 @@ def ping():
     })
 
 # =========================
-# RUN SERVER (DEPLOY SAFE)
+# RUN SERVER (LOCAL + RENDER SAFE)
 # =========================
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
