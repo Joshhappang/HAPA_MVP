@@ -1,4 +1,2 @@
 flask
-git add .
-git commit -m "HAPA MVP ready deploy"
-git push
+gunicorn

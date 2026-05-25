@@ -19,11 +19,23 @@ def home():
 @app.route("/ai/generate", methods=["POST"])
 def ai_generate():
     data = request.json or {}
-    result = engine.ai_generate(data.get("prompt", ""))
+
+    prompt = data.get("prompt", "")
+
+    # call AI engine
+    result = engine.ai_generate(prompt)
+
     return jsonify({
         "status": "success",
         "data": result
     })
+
+# =========================
+# OPTIONAL: SIMPLE TEST ROUTE
+# =========================
+@app.route("/ping")
+def ping():
+    return jsonify({"status": "ok", "message": "HAPA alive"})
 
 # =========================
 # RUN SERVER (LOCAL ONLY)
